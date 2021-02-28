@@ -1,4 +1,5 @@
 from requests_html import HTMLSession
+import csv
 
 url = "https://cluster.mu/w/4ec2b9d7-f287-4347-8dfe-338fa2738b2f"
 
