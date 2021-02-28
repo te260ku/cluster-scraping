@@ -25,3 +25,8 @@ if len(info_list) > 0:
     print(creator)
     print(size)
     print(date)
+    row = [name, like, creator, size, date]
+with open('data/sample.csv', 'w') as f:
+    writer = csv.writer(f)
+    writer.writerow(row)
+    
