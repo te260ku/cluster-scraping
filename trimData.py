@@ -26,6 +26,15 @@ def trim_date(raw_d):
     date_all = datetime.datetime.strptime(date_string, '%Y/%m/%d')
     date = datetime.date(date_all.year, date_all.month, date_all.day)
     return date
-    
+
 def calc_date_interval(date1, date2):
     return abs(date1-date2).days
+
+def trim_all_data(name_r, like_r, creator_r, size_r, date_r):
+    name = name_r
+    like = trim_like(like_r)
+    creator = creator_r
+    size = trim_size(size_r)
+    date = trim_date(date_r)
+    data = [name, like, creator, size, date]
+    return data

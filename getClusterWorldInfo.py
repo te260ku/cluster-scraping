@@ -1,13 +1,17 @@
 from requests_html import HTMLSession
+import time
 import csv
 import trimData
 
-url = "https://cluster.mu/w/4ec2b9d7-f287-4347-8dfe-338fa2738b2f"
+url = "https://cluster.mu/w/c99e7eab-2d28-40c5-a125-f1fa8aa8c269"
 
 session = HTMLSession()
 r = session.get(url)
 
+
+
 r.html.render()
+
 
 h2 = r.html.find('h2')
 h6 = r.html.find('h6')
