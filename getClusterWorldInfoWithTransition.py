@@ -2,11 +2,22 @@ from requests_html import HTMLSession
 from requests_html import AsyncHTMLSession
 import time
 import csv
+import sys
 
 url_base = "https://cluster.mu/w?page="
 base = "https://cluster.mu"
-start_page_num = 50
-end_page_num = 50
+
+args = sys.argv
+
+# ページ番号
+page_nums = ()
+if not args[1] and not args[2]:
+    page_nums = (10, 10)
+else:
+    page_nums = (int(args[1]), int(args[2]))
+
+# 記録するファイル名
+file_name = args[3]
 
 # def wait_render(u):
 #     assesion = AsyncHTMLSession()
@@ -25,7 +36,7 @@ end_page_num = 50
 #         print("error")
 
 
-for i in range(start_page_num, end_page_num+1):
+for i in range(page_nums[0], page_nums[1]+1):
     try:
         url = url_base + str(i)
         links = []
@@ -38,11 +49,6 @@ for i in range(start_page_num, end_page_num+1):
         r.html.render(wait=5, sleep=5)
 
         cards = r.html.find('.MuiCardActionArea-root')
-        
-        if len(cards) > 0:
-            print(url)
-        else:
-            print("error")
 
         if len(cards) > 0:
             print(url)
@@ -50,10 +56,8 @@ for i in range(start_page_num, end_page_num+1):
                 tmp = base + link.attrs['href']
                 links.append(tmp)
             
-            # print(len(links))
 
-            
-            with open('data/sample-3.csv', 'a', newline="") as f:
+            with open('data/' + file_name + '.csv', 'a', newline="") as f:
                 time.sleep(5)
                 writer = csv.writer(f)
                 for link in links:
@@ -89,5 +93,7 @@ for i in range(start_page_num, end_page_num+1):
 
                     except:
                         pass
+        else:
+            print("error")
     except:
         pass
