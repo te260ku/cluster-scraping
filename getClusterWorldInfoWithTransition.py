@@ -5,8 +5,8 @@ import csv
 
 url_base = "https://cluster.mu/w?page="
 base = "https://cluster.mu"
-start_page_num = 56
-end_page_num = 70
+start_page_num = 50
+end_page_num = 50
 
 # def wait_render(u):
 #     assesion = AsyncHTMLSession()
@@ -25,7 +25,7 @@ end_page_num = 70
 #         print("error")
 
 
-for i in range(start_page_num, end_page_num):
+for i in range(start_page_num, end_page_num+1):
     try:
         url = url_base + str(i)
         links = []
@@ -53,7 +53,7 @@ for i in range(start_page_num, end_page_num):
             # print(len(links))
 
             
-            with open('data/sample-2.csv', 'a') as f:
+            with open('data/sample-3.csv', 'a', newline="") as f:
                 time.sleep(5)
                 writer = csv.writer(f)
                 for link in links:
