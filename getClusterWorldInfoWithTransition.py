@@ -5,8 +5,8 @@ import csv
 
 url_base = "https://cluster.mu/w?page="
 base = "https://cluster.mu"
-start_page_num = 50
-end_page_num = 55
+start_page_num = 56
+end_page_num = 70
 
 # def wait_render(u):
 #     assesion = AsyncHTMLSession()
@@ -38,7 +38,6 @@ for i in range(start_page_num, end_page_num):
         r.html.render(wait=5, sleep=5)
 
         cards = r.html.find('.MuiCardActionArea-root')
-        # time.sleep(5)
         
         if len(cards) > 0:
             print(url)
@@ -54,7 +53,8 @@ for i in range(start_page_num, end_page_num):
             # print(len(links))
 
             
-            with open('data/sample-1.csv', 'a') as f:
+            with open('data/sample-2.csv', 'a') as f:
+                time.sleep(5)
                 writer = csv.writer(f)
                 for link in links:
                     try:
@@ -71,19 +71,12 @@ for i in range(start_page_num, end_page_num):
                         p_play = play_list[0].find('p')
                         p_info = info_list[0].find('p')
 
-                        
-
-                        
-
-
                         name_r = h2[0].text
                         play_r = p_play[0].text
                         like_r = p_play[1].text
                         creator_r = h6[0].text
                         size_r = p_info[1].text
                         date_r = p_info[3].text
-
-
 
                         row = [name_r, play_r, like_r, creator_r, size_r, date_r]
 
@@ -92,10 +85,8 @@ for i in range(start_page_num, end_page_num):
                         
                         
                         writer.writerow(row)
-                        time.sleep(2)
+                        time.sleep(5)
 
-                        
-                        
                     except:
                         pass
     except:
