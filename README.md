@@ -3,5 +3,5 @@
 ## How to Use
 
 ```
-python getClusterWorldInfoWithTransitions.py {start_page_num} {end_page_num} {file_name}
+# python get_world_info.py {start_index} {end_index} {file_name}
 ```
