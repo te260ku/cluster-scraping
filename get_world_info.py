@@ -66,11 +66,9 @@ for i in range(page_nums[0], page_nums[1]+1):
             for link in cards:
                 tmp = base + link.attrs['href']
                 links.append(tmp)
-            
 
-            with open('data/' + file_name + '.csv', 'a', newline="", encoding="utf_8_sig") as f:
                 # time.sleep(5)
-                writer = csv.writer(f)
+            
                 for link in links:
                     try:
                         
@@ -85,6 +83,8 @@ for i in range(page_nums[0], page_nums[1]+1):
                         play_list = r_.html.find('.WorldStats__Container-sc-17lod9z-0')
                         p_play = play_list[0].find('p')
                         p_info = info_list[0].find('p')
+                        description_list = r_.html.find('.Description__Container-sc-168rmxs-0')
+                        description_info = description_list[0].find('p')
 
                         name_r = h2[0].text
                         play_r = p_play[0].text
@@ -92,14 +92,17 @@ for i in range(page_nums[0], page_nums[1]+1):
                         creator_r = h6[0].text
                         size_r = p_info[1].text
                         date_r = p_info[3].text
+                        description_r = description_info[0].text
 
-                        row = [name_r, play_r, like_r, creator_r, size_r, date_r]
+                        row = [name_r, play_r, like_r, creator_r, size_r, date_r, description_r]
+
+                        with open('data/' + file_name + '.csv', 'a', newline="", encoding="utf_8_sig") as f:
+                            writer = csv.writer(f)
+                            writer.writerow(row)
 
                         count += 1
                         print(count)
                         
-                        
-                        writer.writerow(row)
                         time.sleep(1)
 
                     except:
